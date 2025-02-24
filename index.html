@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIRVANA - Career for Life</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    @keyframes neonGlow {
+      0%, 100% {
+        box-shadow: 0 0 5px rgba(79, 70, 229, 0.3),
+                    0 0 25px rgba(79, 70, 229, 0.2),
+                    0 0 50px rgba(79, 70, 229, 0.1);
+      }
+      50% {
+        box-shadow: 0 0 10px rgba(79, 70, 229, 0.5),
+                    0 0 30px rgba(79, 70, 229, 0.3),
+                    0 0 60px rgba(79, 70, 229, 0.2);
+      }
+    }
+
+    @keyframes subtleGreenPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 5px rgba(50, 180, 50, 0.6);  
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(50, 180, 50, 0.8);  
+      }
+    }
+  
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      animation: gradientAnimation 60s linear infinite;
+      background-size: 300% 300%;
+    }
+
+  .container {
+      background-color: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.8), 
+                  0 0 0 5px rgba(50, 180, 50, 0.6);  
+      animation: neonGlow 4s ease-in-out infinite,
+                subtleGreenPulse 3s ease-in-out infinite alternate;  
+      max-width: 800px;
+      margin: 30px auto;
+    }
+
+    h1 {
+      color: #00FFFF; 
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5),
+                  0 0 20px rgba(0, 255, 255, 0.3);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    h1:hover {
+      color: #00bfff;
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    }
+
+    p {
+      color: #E0E7FF;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    p:hover {
+      color: #c0c0ff;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+
+    button {
+      background: linear-gradient(45deg, #4F46E5, #7C3AED);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(79, 70, 229, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.5),
+                  0 0 40px rgba(79, 70, 229, 0.3);
+    }
+
+  .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 3em;
+      font-weight: bold;
+      color: #00FFFF; 
+      text-shadow: 0 0 15px #00FFFF;
+    }
+
+  
+  .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+  .modal-content {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(10px);
+      margin: 10% auto;
+      padding: 2rem;
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      width: 350px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(79, 70, 229, 0.2);
+      animation: neonGlow 4s ease-in-out infinite;
+    }
+
+  .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+  .modal-content h2 {
+      color: #00FFFF;  
+      margin-bottom: 1rem;
+    }
+
+     
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid rgba(79, 70, 229, 0.3);
+      border-radius: 6px;
+      background: rgba(30, 41, 59, 0.7);
+      color: #e0e7ff;
+      
+    }
+
+  .toggle-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+  .toggle-buttons button {
+      flex: 1;
+    }
+ 
+  .signup-button, .signin-button {
+      display: block;
+      margin: 0 auto;
+    }
+
+     
+    @media (max-width: 768px) {
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">NIRVANA</div>
+
+  <div class="container">
+    <h1>Shape Your Dream Career</h1>
+    <p>Unleash your potential and discover personalized career paths with our innovative platform. We provide AI-powered guidance and resources to help you achieve your career goals.</p>
+    <button id="startJourneyBtn">Start Your Journey</button>
+  </div>
+
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2>Sign In / Sign Up</h2>
+
+      <div id="signInForm">
+        <input type="text" id="username" placeholder="Username or Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signIn()" class="signin-button">Sign In</button>
+      </div>
+
+      <div id="signUpForm" style="display: none;">
+        <input type="email" id="signupEmail" placeholder="Email">
+        <input type="password" id="signupPassword" placeholder="Password">
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password">
+        <button onclick="signUp()" class="signup-button">Sign Up</button>
+      </div>
+
+      <div class="toggle-buttons">
+        <button onclick="toggleForm('signIn')">Sign In</button>
+        <button onclick="toggleForm('signUp')">Sign Up</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showModal() {
+      document.getElementById('authModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('authModal').style.display = 'none';
+    }
+
+    function toggleForm(form) {
+      if (form === 'signIn') {
+        document.getElementById('signInForm').style.display = 'block';
+        document.getElementById('signUpForm').style.display = 'none';
+      } else {
+        document.getElementById('signInForm').style.display = 'none';
+        document.getElementById('signUpForm').style.display = 'block';
+      }
+    }
+
+    function signUp() {
+      const email = document.getElementById('signupEmail').value;
+      if (email !== '') {
+        window.location.href = 'secondpage.html';
+      } else {
+        alert('Please enter your email');
+      }
+    }
+
+    function signIn() {
+      const username = document.getElementById('username').value;
+      if (username !== '') {
+        window.location.href = 'secondpage.html';
+      } else {
+        alert('Please enter your username or email');
+      }
+    }
+
+    document.getElementById('startJourneyBtn').addEventListener('click', showModal);
+  </script>
+</body>
+</html>
