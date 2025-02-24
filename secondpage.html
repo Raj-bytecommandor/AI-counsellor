@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIRVANA</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .coming-soon-div {
+        background-color: rgba(124, 58, 237, 0.1);
+        color: white;
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        font-weight: 500;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-size: 0.8em;
+        border: 1px solid rgba(255, 0, 0, 0.4);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2),
+                    0 6px 6px rgba(79, 70, 229, 0.1),
+                    0 0 100px rgba(79, 70, 229, 0.1),
+                    0 0 20px rgba(0, 255, 0, 0.8),  
+                    0 0 40px rgba(0, 255, 0, 0.6);
+        border-color: rgba(79, 70, 229, 0.4);
+      }
+
+      .feature-card:hover.coming-soon-div {
+        background-color: rgba(0, 255, 0, 0.3);
+        transform: translateY(-4px) scale(1.1);
+        box-shadow: 0 0 30px rgba(0, 255, 0, 0.8),
+                    0 0 60px rgba(0, 255, 0, 0.6);
+      }
+
+      .mentorship-image {
+        width: 50px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .chatbot-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4f46e5;
+        border-radius: 10%; /* Changed to make it a square button */
+        width: 100px; /* Increased size */
+        height: 100px; /* Increased size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .chatbot-button img {
+        width: 70px; /* Increased size */
+        height: 70px; /* Increased size */
+      }
+
+      .chatbot-button:hover {
+        background-color: #3b3b98;
+      }
+
+      .chatbot-button:hover + .chatbot-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-10px);
+      }
+
+      .chatbot-tooltip {
+        position: fixed;
+        bottom: 140px;
+        right: 20px;
+        background-color: #4f46e5;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="animate-gradient">
+    <header class="header">
+      <div class="header-content">
+        <!-- <div class="logo">NIRVANA</div> -->
+        <!-- <div class="auth-buttons">
+          <button class="button">Sign In</button>
+          <button class="button">Sign Up</button>
+        </div> -->
+      </div>
+    </header>
+    <div class="main-content">
+      <section class="hero-section">
+        <h1 class="hero-title">Nirvana: A step ahead to career</h1>
+        <p class="hero-subtitle">Discover personalized career paths and develop in-demand skills with AI-powered
+          guidance</p>
+      </section>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Job Market Insights</h3>
+          <img src="job.jpeg" alt="Job Market" class="mentorship-image">
+          <div class="coming-soon-div">Coming Soon</div>
+        </div>
+        <div class="feature-card">
+          <h3>Mentor Guidance</h3>
+          <img src="mentor - Copy.jpeg" alt="Mentorship" class="mentorship-image">
+          <div class="coming-soon-div">Coming Soon</div>
+        </div>
+        <div class="feature-card">
+          <h3>Updates on Hackathons</h3>
+          <img src="hackathon.jpeg" alt="Hackathon" class="mentorship-image">
+          <div class="coming-soon-div">Coming Soon</div>
+        </div>
+        <div class="feature-card">
+          <h3> Student Dashboard</h3>
+          <img src="student.jpeg" alt="Hackathon" class="mentorship-image">
+          <div class="coming-soon-div">Coming Soon</div>
+        </div>
+        <div class="feature-card">
+          <h3> Tech news & Event</h3>
+          <img src="immu.jpeg" alt="Hackathon" class="mentorship-image">
+          <div class="coming-soon-div">Coming Soon</div>
+        </div>
+        <div class="feature-card">
+          <h3> Study Resource</h3>
+          <img src="study.jpeg" alt="Hackathon" class="mentorship-image">
+          <div class="coming-soon-div">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+   
+    <div id="chatbot-button" class="chatbot-button">
+      <img src="nextra.jpeg" alt="Chatbot" />
+    </div>
+    <div class="chatbot-tooltip">Hey! Any help?</div>
+    <script src="script.js"></script>
+    <script>
+      document.getElementById('chatbot-button').addEventListener('click', function() {
+        window.location.href = 'chatbot.html'; 
+      });
+    </script>
+  </body>
+</html>
