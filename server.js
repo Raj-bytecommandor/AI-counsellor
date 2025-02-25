@@ -1,4 +1,4 @@
-require('dotenv').config();
+ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -10,67 +10,53 @@ if (!GEMINI_API_KEY) {
     process.exit(1);
 }
 
-// Initialize Gemini with proper configuration
+console.log('Initializing with API key...');
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ 
-    model: "gemini-pro",
-    generationConfig: {
-        temperature: 0.7,
-        topP: 1,
-        topK: 1,
-        maxOutputTokens: 2048,
-    },
-});
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 const app = express();
+
+
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname)));
 
-const PORT = 3000;
-
+// Root route should serve the chatbot
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'chatbot.html'));
 });
 
+
 app.post('/message', async (req, res) => {
     try {
+        console.log('Received request body:', req.body);
         const userMessage = req.body.message;
-        console.log('Processing message:', userMessage);
-
+        
         if (!userMessage) {
-            throw new Error('Empty message received');
+            return res.status(400).json({ error: true, response: 'Message is required' });
         }
 
-        // Generate the chat response
-        const chat = model.startChat({
-            history: [],
-            generationConfig: {
-                maxOutputTokens: 2048,
-            },
-        });
-
-        const result = await chat.sendMessage(userMessage);
+        const result = await model.generateContent(userMessage);
         const response = await result.response;
         const text = response.text();
         
         console.log('Generated response:', text);
-        res.json({ response: text });
+        return res.json({ response: text });
 
     } catch (error) {
-        console.error('API Error:', error);
-        res.status(500).json({ 
-            response: "Server Error: " + (error.message || "Unknown error occurred"),
-            error: true
+        console.error('Server error:', error);
+        return res.status(500).json({ 
+            error: true,
+            response: "Server Error: " + error.message 
         });
     }
 });
 
-// Add a test endpoint
-app.get('/test', (req, res) => {
-    res.json({ status: 'Server is running' });
-});
+ 
+app.options('/message', cors());
 
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+ 
