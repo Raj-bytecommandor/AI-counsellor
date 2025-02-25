@@ -1,4 +1,4 @@
-function toggleChat() {
+ function toggleChat() {
   const chatWindow = document.getElementById('chatbot-container');
   chatWindow.classList.toggle('active');
 }
@@ -10,7 +10,7 @@ function sendMessage() {
   if (message) {
       addMessage(message, 'user');
       input.value = '';
- 
+
       setTimeout(() => {
           addMessage("I'm analyzing your request. Soon I'll provide personalized career guidance here.", 'bot');
       }, 1000);
