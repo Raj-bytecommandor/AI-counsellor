@@ -2,48 +2,51 @@
     const userInput = document.getElementById('userInput');
     const chatBox = document.getElementById('chatBox');
 
+    // Test connection when page loads
+    fetch('/ping')
+        .then(res => res.json())
+        .then(() => console.log('Server connected'))
+        .catch(err => console.error('Server connection test failed:', err));
+
     async function sendMessage() {
         const message = userInput.value.trim();
-        if (message) {
-            try {
-                appendMessage('user', message);
-                userInput.value = '';
-                appendMessage('bot', 'Thinking...');
+        if (!message) return;
 
-                const response = await fetch('http://localhost:3000/message', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ message })
-                });
+        try {
+            appendMessage('user', message);
+            userInput.value = '';
+            appendMessage('bot', 'Thinking...');
 
-                console.log('Response status:', response.status);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+            const response = await fetch('http://localhost:3000/message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            });
 
-                const data = await response.json();
-                console.log('Response data:', data);
-
-                if (chatBox.lastChild && chatBox.lastChild.textContent === 'Thinking...') {
-                    chatBox.removeChild(chatBox.lastChild);
-                }
-
-                if (data.error) {
-                    throw new Error(data.response);
-                }
-
-                appendMessage('bot', data.response);
-
-            } catch (error) {
-                console.error('Error details:', error);
-                if (chatBox.lastChild && chatBox.lastChild.textContent === 'Thinking...') {
-                    chatBox.removeChild(chatBox.lastChild);
-                }
-                appendMessage('error', `Error: ${error.message}`);
+            const data = await response.json();
+            
+            // Remove thinking message
+            const thinkingMsg = document.querySelector('.message.bot:last-child');
+            if (thinkingMsg?.textContent === 'Thinking...') {
+                thinkingMsg.remove();
             }
+
+            if (data.error) {
+                throw new Error(data.response);
+            }
+
+            appendMessage('bot', data.response);
+
+        } catch (error) {
+            console.error('Error:', error);
+            const thinkingMsg = document.querySelector('.message.bot:last-child');
+            if (thinkingMsg?.textContent === 'Thinking...') {
+                thinkingMsg.remove();
+            }
+            appendMessage('error', 'Error connecting to chatbot. Please try again.');
         }
     }
 
